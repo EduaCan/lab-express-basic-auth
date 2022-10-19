@@ -51,7 +51,6 @@ router.get("/login", (req, res, next) => {
 //POST "/auth/login" => validar y crear cookie de acceso
 router.post("/login", async (req, res, next) => {
   const { username, password } = req.body;
-  //1. validar
   //campos vacios
   if (username === "" || password === "") {
     res.render("auth/login.hbs", {
@@ -78,10 +77,12 @@ router.post("/login", async (req, res, next) => {
     }
     req.session.activeUser = userExists
     req.session.save(()=>{
-        //4. redireccionar a una pagina privada
+        //redireccionar a una pagina privada
         res.redirect("/profile");
     })
   } catch (error) {}
 });
+
+
 
 module.exports = router;
